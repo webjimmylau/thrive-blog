@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 import { visualizer } from "rollup-plugin-visualizer";
 
@@ -17,9 +17,9 @@ export default defineConfig({
       template: {
         // 不解析iconpark-开头的自定义组件
         compilerOptions: {
-          isCustomElement: tag => tag.startsWith('iconpark-')
-        }
-      }
+          isCustomElement: (tag) => tag.startsWith("iconpark-"),
+        },
+      },
     }),
     // 配置自动按需导入
     AutoImport({
@@ -32,7 +32,7 @@ export default defineConfig({
         globalsPropValue: true,
       },
       // 配置文件
-      dts: "auto-import.d.ts"
+      dts: "auto-import.d.ts",
     }),
     // 配置组件自动导入
     Components({
@@ -51,26 +51,27 @@ export default defineConfig({
       brotliSize: true,
       emitFile: false,
       filename: "test.html", //分析图生成的文件名
-      open: true //如果存在本地服务端口，将在打包后自动展示
-    })
+      open: true, //如果存在本地服务端口，将在打包后自动展示
+    }),
   ],
   // ↓解析配置
   resolve: {
     // ↓路径别名
     alias: {
-      "@": resolve(__dirname, "./src")
-    }
+      "@": resolve(__dirname, "./src"),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
         additionalData: `
+            @use "@/styles/global.scss" as *;
             @use "@/styles/public.scss" as *;
         `,
-      }
-    }
+      },
+    },
   },
   server: {
-    host: '0.0.0.0'
-  }
-})
+    host: "0.0.0.0",
+  },
+});
